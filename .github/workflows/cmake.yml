@@ -1,0 +1,34 @@
+name: auto_build
+
+on:
+ push:
+  branches: [main]
+ pull_request:
+  branches: [main]
+
+jobs:
+ build_Linux:
+
+  runs-on: ubuntu-latest
+
+  steps:
+  - uses: actions/checkout@v3
+
+  - name: cmake_1
+    run: cmake ${{github.workspace}} -B ${{github.workspace}}/build
+
+  - name: cmake_2
+    run: cmake --build ${{github.workspace}}/build
+
+ build_Windows:
+
+  runs-on: windows-latest
+
+  steps:
+  - uses: actions/checkout@v3
+  
+  - name: cmake_1
+    run: cmake ${{github.workspace}} -B ${{github.workspace}}/build
+
+  - name: cmake_2
+    run: cmake --build ${{github.workspace}}/build
